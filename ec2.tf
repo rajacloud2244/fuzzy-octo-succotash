@@ -1,4 +1,4 @@
-
+/*
 
 module "ec2_instances" {
   source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//ec2.tf"
@@ -34,3 +34,4 @@ module "ec2_instances" {
   tags = local.tags
 }
 
+*/
