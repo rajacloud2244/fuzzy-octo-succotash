@@ -1,7 +1,7 @@
 
 
 module "vpc" {
-  source                   = "./modules/vpc"  
+  source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//vpc.tf"
 
   create_vpc             = local.vpc_create.create_vpc
   vpc_count              = local.vpc_create.vpc_count
