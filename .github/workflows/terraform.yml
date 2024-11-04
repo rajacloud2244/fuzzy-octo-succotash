@@ -5,7 +5,7 @@ on:
       - main  # Trigger only on pushes to the main branch
 
 env:
-  AWS_REGION: "eu-east-1"
+  AWS_REGION: "us-east-1"
 
 permissions:
   id-token: write  # Required for requesting the JWT
@@ -24,7 +24,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::741448962992:role/OIDCRole
           role-session-name: samplerolesession
-          aws-region: ${{ env.AWS_REGION }}  # Use the environment variable
+          aws-region: us-east-1  # Use the environment variable
 
       - name: Print AWS SSM Parameter
         run: aws ssm get-parameter --name hello_aws-gh-oidc --query Parameter.Value --output text
