@@ -1,6 +1,6 @@
 /*
 module "alb" {
-  source                   = "./modules/alb"  
+  source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//alb"
 
   create                   = local.create
   access_logs              = local.access_logs
