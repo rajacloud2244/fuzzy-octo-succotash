@@ -1,7 +1,7 @@
-/*
+
 
 module "ec2_instances" {
-  source                   = "./modules/ec2"  
+  source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//ec2.tf"
 
   instance_count                   = local.instance_count
   putin_khuylo             = local.putin_khuylo
@@ -34,4 +34,3 @@ module "ec2_instances" {
   tags = local.tags
 }
 
-*/
