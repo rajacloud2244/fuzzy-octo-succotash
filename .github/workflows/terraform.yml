@@ -22,27 +22,16 @@ jobs:
           terraform_version: 1.5.0  # Specify the Terraform version
 
       - name: Configure AWS Credentials
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          echo "[default]" > ~/.aws/credentials
-          echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
-          echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1  # Specify your region
+          role-to-assume: arn:aws:iam::741448962992:role/AdminAccess-IAM  # Your IAM role ARN
 
       - name: Terraform Init
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
-
-      - name: Terraform Plan
-        id: plan
-        run: |
-          terraform plan -out=tfplan -var-file=variables.tfvars
 
       - name: Upload Terraform Plan
         if: success()
