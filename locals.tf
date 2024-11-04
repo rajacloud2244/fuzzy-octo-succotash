@@ -80,16 +80,17 @@ dynamo_db_config = {
    # VPC configuration
   #####################################
  vpc_create = {
-    create_vpc             = true
+     create_vpc             = true
     vpc_count              = 1
-    cidr_blocks            = ["10.0.0.0/16", "10.1.0.0/16", "10.2.0.0/16"]
-    secondary_cidr_blocks  = ["10.0.1.0/24", "10.1.1.0/24", "10.2.1.0/24"]
+    cidr_blocks            = ["10.0.0.0/16"]  # Only primary CIDR
+    secondary_cidr_blocks  = ["10.1.0.0/24", "10.2.0.0/24"]  # Non-conflicting
     public_subnet_count    = 1
     private_subnet_count   = 1
-    public_subnet_cidrs    = ["10.0.0.0/24", "10.0.1.0/24"]
-    private_subnet_cidrs   = ["10.0.2.0/24", "10.0.3.0/24"]
+    public_subnet_cidrs    = ["10.0.1.0/24"]  # Adjusted to avoid conflict
+    private_subnet_cidrs   = ["10.0.2.0/24", "10.0.3.0/24"]  # Okay as is
     availability_zones     = ["us-east-1a", "us-east-1b", "us-east-1c"]
     name                   = "my-vpc"
     tags                   = { "Environment" = "Dev" }
+}
   }
 }
