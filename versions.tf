@@ -9,16 +9,20 @@ terraform {
   required_version = ">= 1.0"
 
   backend "s3" {
-    bucket         = "backendterraform2244"         # Your S3 bucket name
-    key            = "project-name/terraform.tfstate" # Path within the bucket for the state file
+    bucket         = "tf2244"         # Your S3 bucket name
+    key            = "terraform/terraform.tfstate" # Path within the bucket for the state file (terraform is folder name)
     region         = "us-east-1"                     # The region where the bucket is located
-    #dynamodb_table = "terraform-lock-table"          # Optional: for state locking
+    # dynamodb_table = "terraform-lock-table"         # Optional: for state locking
     encrypt        = true                             # Optional: enable server-side encryption
   }
 }
 
 provider "aws" {
-  region     = "us-east-1"                          # Match the region of the S3 bucket
-  access_key = var.access_key                       # Ensure your access key is set correctly
-  secret_key = var.secret_key                       # Ensure your secret key is set correctly
+  region = "us-east-1"  # Match the region of the S3 bucket
+
+  assume_role {
+    role_arn = "arn:aws:iam::741448962992:role/AdminAccess-IAM"  # Use your IAM role ARN
+    session_name = "terraform-session"                            # Optional: provide a session name
+  }
 }
+
