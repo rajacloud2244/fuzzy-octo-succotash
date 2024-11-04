@@ -41,7 +41,7 @@ jobs:
           terraform plan -out=tfplan \
           #-var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
           #-var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" \
-          #-var-file=variables.tfvars
+          -var-file=assignvalues.tfvars
 
       - name: Upload Terraform Plan
         if: success()
