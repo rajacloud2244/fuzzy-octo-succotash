@@ -1,3 +1,32 @@
+data "aws_ssm_parameter" "ami_al2023" {
+  name = "/aws/service/ami-al2023-latest"
+}
+
+ata "aws_vpc" "example" {
+  filter {
+    name   = "tag:Name"
+    values = ["Testvpcdemo"]  # Replace with your VPC name
+  }
+}
+
+# Fetch subnets associated with the VPC
+data "aws_subnets" "vpc_subnets" {
+  filter {
+    name   = "vpc-id"           # Filter by VPC ID
+    values = [data.aws_vpc.example.id]  # Using the VPC ID fetched earlier
+  }
+}
+
+
+data "aws_security_group" "example" {
+  filter {
+    name   = "group-name"  # Filter by the security group name
+    values = ["launch-wizard-2"]  # Use a list with a single string
+  }
+}
+
+
+
 locals {
 
                   
