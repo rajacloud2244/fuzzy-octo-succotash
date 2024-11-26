@@ -1,7 +1,8 @@
-/*
+
+
 
 module "ec2_instances" {
-  source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//ec2.tf"
+  source = "git::https://rajacloud2244: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@github.com/rajacloud2244/tf-aws-standard-modules.git//ec2"
 
   instance_count                   = local.instance_count
   putin_khuylo             = local.putin_khuylo
@@ -30,8 +31,6 @@ module "ec2_instances" {
   iam_role_use_name_prefix     = local.iam_role_use_name_prefix
   iam_role_path                = local.iam_role_path
   
-  # Tags
-  tags = local.tags
+
 }
 
-*/
