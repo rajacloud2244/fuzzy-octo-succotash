@@ -1,24 +1,25 @@
 locals {
 
-  ##################
+                     = 1
+    ##################
   #VM Instances
   ##################
 
   instance_count = "1"
   putin_khuylo             = true
   ami                      = null  # Use SSM parameter for AMI
-  ami_ssm_parameter        = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-  instance_type            = "t2.micro"
+  ami_ssm_parameter        =  "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+  instance_type            = "t3.micro"
   cpu_core_count           = 1
-  cpu_threads_per_core     = 1
+  cpu_threads_per_core     = 2
   hibernation              = false
 
   # Networking variables
-  availability_zone        = "us-west-2a"  # Adjust as necessary
-  subnet_id                = "subnet-12345678"  # Replace with your subnet ID
-  vpc_security_group_ids   = ["sg-12345678"]  # Replace with your security group ID
+  availability_zone        = "us-east-1c"  # Adjust as necessary
+  subnet_id                =  "subnet-0c3af2e62a8c28b7c" #data.aws_subnets.vpc_subnets.ids[0]  
+  vpc_security_group_ids   =  ["sg-02d0c22d87a0ef224"] #[data.aws_security_group.example.id]  
 
-  key_name                 = "my-keypair"  # Replace with your key pair name
+  key_name                 = null # Replace with your key pair name
   monitoring               = false
   associate_public_ip_address = true
   ebs_optimized            = true
@@ -41,8 +42,9 @@ locals {
     #volume1 = { size = 10, availability_zone = data.aws_availability_zones.available.names[0] }
     #volume1 = { size = 10, availability_zone = data.aws_availability_zones.available.names[0] }
 
-    volume1 = { size = 10, availability_zone = null }  # Optional availability zone
+    volume1 = { size = 10, availability_zone = "us-east-1c" }  # Optional availability zone
     #volume2 = { size = 20, availability_zone = null }  # Optional availability zone
+
   }
 
   
@@ -76,6 +78,7 @@ dynamo_db_config = {
     timeouts                         = { "create" = "10m", "delete" = "10m", "update" = "10m" }
   }
 
+  
   #####################################
    # VPC configuration
   #####################################
